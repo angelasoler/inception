@@ -17,8 +17,10 @@ RUN chmod +x /etc/mysql/init.sql
 
 EXPOSE 3306
 
+#TO-DO adicionar credenciais
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql && \
-    sleep 5 && \
-    mysql -h localhost -u root -p < /etc/mysql/init.sql
+    sleep 5
+    #sintax error on init.sql
+    #mysql -h localhost -u root -p < /etc/mysql/init.sql
 
-CMD ["mariadbd_safe"]
+CMD ["mariadbd-safe"]

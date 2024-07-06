@@ -7,7 +7,7 @@ run:
 	docker run --rm --name mariadb -p 3306:3306 -dt mariadb
 	
 clean:
-	docker stop mariadb
+	# docker stop mariadb
 	docker rmi mariadb
 
 re: clean all
