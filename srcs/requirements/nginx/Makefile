@@ -4,7 +4,7 @@ all:
 build:
 	docker build -t nginx .
 
-run:
+run: all build
 	docker run --rm --name nginx -p 443:443 -dt nginx
 	
 clean:
