@@ -16,11 +16,11 @@ RUN mkdir -p /var/www/html && \
     tar -zxvf wordpress.tar.gz --strip-components=1 -C /var/www/html && \
     rm wordpress.tar.gz
 
-COPY ../conf/php-fpm.conf /etc/php8/php-fpm.d/www.conf
-COPY ../conf/supervisord.conf /etc/supervisord.conf
+COPY conf/php-fpm.conf /etc/php8/php-fpm.d/www.conf
+COPY conf/supervisord.conf /etc/supervisord.conf
 
 RUN adduser -S -G www-data www-data && \
-chown -R www-data:www-data /var/www/html
+    chown -R www-data:www-data /var/www/html
 
 EXPOSE 443
 

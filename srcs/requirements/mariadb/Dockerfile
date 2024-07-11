@@ -17,7 +17,6 @@ RUN chmod +x /etc/mysql/init.sql
 
 EXPOSE 3306
 
-#TO-DO adicionar credenciais
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 RUN mysqld_safe --datadir='/var/lib/mysql' & \
