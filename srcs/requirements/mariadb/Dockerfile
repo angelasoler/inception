@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.19
 
 ENV MARIADB_DATA_DIR=/var/lib/mysql
 ENV MARIADB_RUN_DIR=/run/mysqld
