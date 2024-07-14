@@ -4,7 +4,7 @@ build:
 	docker build -t wordpress .
 
 run: all build
-	docker run --rm --name wordpress --network wp_network -p 9001:9001 -dt wordpress
+	docker run --rm --name wordpress -p 9001:9001 -dt wordpress
 	
 clean:
 	docker stop wordpress

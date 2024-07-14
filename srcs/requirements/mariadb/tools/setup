@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mysqld_safe --skip-grant-tables --socket=/run/mysqld/mysqld.sock --datadir='/var/lib/mysql' &
+
+sleep 10
+
+mysql -h 127.0.0.1 -P 3306 -u root -e "source /etc/mysql/init.sql"
+
+mysqladmin -u root shutdown

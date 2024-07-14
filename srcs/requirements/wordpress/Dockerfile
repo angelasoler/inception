@@ -2,9 +2,10 @@ FROM alpine:3.19
 
 RUN apk update && apk upgrade && \
     apk add --no-cache \
-    php8 \
-    php8-fpm \
-    php8-mysqli \
+    php83 \
+    php83-fpm \
+    php83-mysqli \
+    php83-phar \
     mariadb-client \
     curl \
     wget \
@@ -16,11 +17,25 @@ RUN mkdir -p /var/www/html && \
     tar -zxvf wordpress.tar.gz --strip-components=1 -C /var/www/html && \
     rm wordpress.tar.gz
 
-COPY conf/php-fpm.conf /etc/php8/php-fpm.d/www.conf
-COPY conf/supervisord.conf /etc/supervisord.conf
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
+
+RUN apk add 
+
+RUN ln -s /usr/bin/php83 /usr/bin/php && \
+    ln -s /usr/sbin/php-fpm83 /usr/sbin/php-fpm
 
 RUN adduser -S -G www-data www-data && \
     chown -R www-data:www-data /var/www/html
+
+COPY conf/php-fpm.conf /etc/php83/php-fpm.d/www.conf
+
+COPY conf/supervisord.conf /etc/supervisord.conf
+
+COPY tools/setup /usr/bin/setup
+
+RUN /var/www/htm setup
 
 EXPOSE 443
 
