@@ -7,6 +7,7 @@ RUN apk update && apk upgrade && \
     php83-mysqli \
     php83-phar \
     php-iconv \
+    php83-mbstring \
     mariadb-client \
     curl \
     wget \
@@ -39,4 +40,3 @@ WORKDIR /var/www/html
 EXPOSE 443
 
 CMD setup
-# CMD tail -f /dev/null

@@ -19,8 +19,6 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
-INSERT INTO users (username, email, password) VALUES ('user', 'user@example.com', SHA2('PasswordHere', 256));
-
 
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO '${MYSQL_USER}'@'%';
@@ -30,3 +28,5 @@ SELECT 'Initial database setup completed.' AS 'Message';
 EOF
 
 mysqladmin -u root shutdown
+
+# mysqld_safe
