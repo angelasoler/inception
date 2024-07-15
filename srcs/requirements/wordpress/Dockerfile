@@ -6,6 +6,7 @@ RUN apk update && apk upgrade && \
     php83-fpm \
     php83-mysqli \
     php83-phar \
+    php-iconv \
     mariadb-client \
     curl \
     wget \
@@ -31,12 +32,11 @@ RUN adduser -S -G www-data www-data && \
 
 COPY conf/php-fpm.conf /etc/php83/php-fpm.d/www.conf
 
-COPY conf/supervisord.conf /etc/supervisord.conf
-
 COPY tools/setup /usr/bin/setup
 
-RUN /var/www/htm setup
+WORKDIR /var/www/html
 
 EXPOSE 443
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD setup
+# CMD tail -f /dev/null

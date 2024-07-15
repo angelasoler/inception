@@ -1,9 +1,32 @@
 #!/bin/sh
 
-mysqld_safe --skip-grant-tables --socket=/run/mysqld/mysqld.sock --datadir='/var/lib/mysql' &
+mysqld_safe --skip-grant-tables &
 
 sleep 10
 
-mysql -h 127.0.0.1 -P 3306 -u root -e "source /etc/mysql/init.sql"
+mysql -u root <<EOF
+USE mysql;
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED with mysql_native_password;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+FLUSH PRIVILEGES;
+
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DB};
+USE ${MYSQL_DB};
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+INSERT INTO users (username, email, password) VALUES ('user', 'user@example.com', SHA2('PasswordHere', 256));
+
+
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO '${MYSQL_USER}'@'%';
+FLUSH PRIVILEGES;
+
+SELECT 'Initial database setup completed.' AS 'Message';
+EOF
 
 mysqladmin -u root shutdown

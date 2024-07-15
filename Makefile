@@ -6,8 +6,12 @@ all:
 
 down:
 	docker-compose -f srcs/docker-compose.yml down
-	rm -rf srcs/requirements/nginx/conf/asoler* home
 
 
 clean: down
 	docker system prune -a
+	rm -rf srcs/requirements/nginx/conf/asoler* home
+	rm -rf /home/asoler
+
+re: clean
+	make
