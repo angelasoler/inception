@@ -2,7 +2,13 @@ services:
   mariadb:
     image: mariadb:1.0
     container_name: mariadb
-    build: requirements/mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        - MYSQL_DB=$MYSQL_DB
+        - MYSQL_USER=$MYSQL_US
+        - MYSQL_PASSWORD=$MYSQL_PASSWORD
     ports:
       - "3306:3306"
     volumes:
@@ -22,7 +28,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html
     networks:
       - inception_network
     restart: always
@@ -36,7 +42,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html
     env_file:
       - .env
     networks:

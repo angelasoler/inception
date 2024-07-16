@@ -6,4 +6,6 @@ wp core install --url=$DOMAIN_NAME --title="$WP_TITLE" --admin_user=$WP_ADMIN_N 
 
 wp user create $WP_USER_N $WP_USER_E --user_pass=$WP_USER_P --role=subscriber
 
+wp option update users_can_register 1
+
 /usr/sbin/php-fpm83 -F

@@ -3,10 +3,13 @@ FROM alpine:3.19
 ENV MARIADB_DATA_DIR=/var/lib/mysql
 ENV MARIADB_RUN_DIR=/run/mysqld
 ENV MARIADB_LOG_DIR=/var/log/mysql
-#TO-DO retira env vars daqui
-ENV MYSQL_DB=WordPressDB
-ENV MYSQL_USER=asoler
-ENV MYSQL_PASSWORD=softpass
+#env vars from docker-compose from .env
+ARG MYSQL_DB
+ENV MYSQL_DB=$MYSQL_DB
+ARG MYSQL_USER
+ENV MYSQL_USER=$MYSQL_USER
+ARG MYSQL_PASSWORD
+ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
 
 RUN apk update && apk upgrade && \
     apk add --no-cache \

@@ -28,5 +28,3 @@ SELECT 'Initial database setup completed.' AS 'Message';
 EOF
 
 mysqladmin -u root shutdown
-
-# mysqld_safe
