@@ -12,6 +12,8 @@ down:
 
 clean: down
 	docker system prune -a
+	docker volume rm mariadb
+	docker volume rm wordpress
 	rm -rf srcs/requirements/nginx/conf/asoler* home
 	rm -rf /home/asoler
 

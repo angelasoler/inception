@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       args:
         - MYSQL_DB=$MYSQL_DB
-        - MYSQL_USER=$MYSQL_US
+        - MYSQL_USER=$MYSQL_USER
         - MYSQL_PASSWORD=$MYSQL_PASSWORD
     ports:
       - "3306:3306"
