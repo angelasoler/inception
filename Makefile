@@ -5,10 +5,10 @@ all:
 	make up
 
 up:
-	docker-compose -f srcs/docker-compose.yml up -d
+	docker compose -f srcs/docker-compose.yml up -d
 
 down:
-	docker-compose -f srcs/docker-compose.yml down
+	docker compose -f srcs/docker-compose.yml down
 
 clean: down
 	docker system prune -a
